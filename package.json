@@ -1,27 +1,23 @@
 {
-  "name": "proyectodeclase_bryancaballero_luissandoval",
+  "name": "proyectofinalprueba",
   "version": "1.0.0",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/BryanCaballero0922/ProyectoClase_BryanCaballero_LuisSandoval_Fronted.git"
+    "start": "parcel public/index.html",
+    "build": "parcel build public/index.html"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/BryanCaballero0922/ProyectoClase_BryanCaballero_LuisSandoval_Fronted/issues"
-  },
-  "homepage": "https://github.com/BryanCaballero0922/ProyectoClase_BryanCaballero_LuisSandoval_Fronted#readme",
   "description": "",
   "dependencies": {
     "bootstrap": "^5.3.6",
-    "react-dom": "^19.1.0"
+    "parcel": "^2.15.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-router-dom": "^6.30.0"
   },
   "devDependencies": {
-    "parcel": "^2.15.2"
+    "@babel/core": "^7.27.1",
+    "@babel/preset-react": "^7.27.1"
   }
 }
