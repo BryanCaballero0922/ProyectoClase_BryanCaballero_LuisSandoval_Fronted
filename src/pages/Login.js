@@ -24,7 +24,7 @@ function Login() {
     let valid = true;
 
     if (!/^\d+$/.test(email)) {
-      setInputError('Código inválido. Solo se permiten números.');
+      setInputError('Código inválido. No se reconoce este codigo.');
       valid = false;
     } else {
       setInputError(null);
@@ -102,9 +102,9 @@ function Login() {
           {passwordError && <div className="text-danger mb-3">{passwordError}</div>}
 
           <button
-   className="btn btn-outline-success w-100"
-  type="button"
-  data-bs-toggle="button"
+   className="btn btn-outline-warning w-100"
+  type="subimit"
+  data-bs-toggle="subimit"
   onClick={handleOnClick}
 >
   Ingresar
