@@ -8,7 +8,7 @@ function Contactos() {
     correo: '',
     telefono: '',
     direccion: ''
-  });
+  });//hola mami
 
   const handleOnChangeInputs = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
