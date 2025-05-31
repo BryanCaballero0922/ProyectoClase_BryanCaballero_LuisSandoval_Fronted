@@ -36,7 +36,7 @@ function Club() {
         <div className="container mt-4">
             <h2>Gestión de Club</h2>
             <form onSubmit={handleOnSubmit} className="mb-4">
-                {['name', 'phone', 'description', 'age'].map((campo) => (
+                {['Nombre Completo', 'Numero telefonico', 'Descripcion', 'Edad'].map((campo) => (
                     <input
                         key={campo}
                         name={campo}
