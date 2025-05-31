@@ -23,7 +23,7 @@ function TopNavbar(){
       <ul className="navbar-nav">
         <li className="nav-item"><a className="nav-link" href="#">Inicio</a></li>
         <li className="nav-item"><a className="nav-link" href="#">Contacto</a></li>
-        <li className="nav-item"><a className="nav-link" href="#">Productos</a></li>
+        <li className="nav-item"><a className="nav-link" href="#">Club Americans</a></li>
         <li className="nav-item"><a className="nav-link" href="#">Ofertas</a></li>
       </ul>
       </div>

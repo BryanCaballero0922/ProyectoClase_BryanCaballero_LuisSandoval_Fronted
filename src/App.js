@@ -11,23 +11,25 @@ function App() {
         description: "Clase de los sabados"
     }]);
 
-    return (
-       <BrowserRouter>
+     return (
+    <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login />} />
-        
+
         <Route path="/*" element={
-          <div>
+          <div className="d-flex flex-column min-vh-100">
             <TopNavbar />
-            <div style={{
-              marginLeft: '210px', marginTop: '60px',
-              padding: '20px'
-            }}>
+
+            <div
+              className="flex-grow-1"
+              style={{ marginLeft: '210px', marginTop: '60px',padding: '20px'}}
+            >
               <Routes>
                 <Route path="/" element={<Home />} />
               </Routes>
             </div>
-            <Footer /> {/* Footer solo se muestra en esta ruta */}
+
+            <Footer />
           </div>
         } />
       </Routes>

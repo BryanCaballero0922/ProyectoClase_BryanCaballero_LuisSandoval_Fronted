@@ -78,7 +78,7 @@ function Login() {
     backgroundRepeat: 'no-repeat'
   }}
 >
-  <div className="card bg-success text-white shadow rounded-4 border-0" style={{ width: '340px' }}>
+  <div className="card bg-dark text-white border border-warning shadow-lg rounded-3" style={{ width: '340px' }}>
     <div className="card-body">
       <h1 className="text-center mb-3">Autopartes University</h1>
       <h2 className="text-center mb-3">Iniciar Sesión</h2>
@@ -104,11 +104,11 @@ function Login() {
         {passwordError && <div className="text-danger mb-3">{passwordError}</div>}
 
         <button
-          className="btn btn-dark w-100"
+          className="btn btn-light w-100"
           type="submit"
           onClick={handleOnClick}
           onMouseOver={(e) => e.currentTarget.className = "btn btn-warning w-100"}
-          onMouseOut={(e) => e.currentTarget.className = "btn btn-dark w-100"}
+          onMouseOut={(e) => e.currentTarget.className = "btn btn-light w-100"}
         >
           Ingresar
         </button>

@@ -2,7 +2,7 @@ import React from 'react';
 
 function Footer() {
   return (
-    <footer className="bg-dark text-white text-center py-3 mt-auto">
+    <footer className="bg-dark text-white text-center py-5 mt-auto">
 
      <div>
       Contactanos al: 9987-6633
