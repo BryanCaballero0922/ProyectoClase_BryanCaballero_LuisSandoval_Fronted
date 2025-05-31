@@ -8,7 +8,7 @@ function Home() {
         {name:'Brazo estabilizardor', brand:'Premium', image:'https://solucionesihd.com/wp-content/uploads/2024/01/BRAZO-ESTABILIZADOR-H1-VAN-THETA-2.4L-ML.jpg'},
         {name:'Banda de motor', brand:'Gates', image:'https://http2.mlstatic.com/D_NQ_NP_2X_786384-MLM45521509837_042021-F.jpg'},
          {name:'Balinera de rueda', brand:'Balresa', image:'https://th.bing.com/th/id/OIP._R4bjarQ0bCPpBnGJoQPYQHaHa?w=2500&h=2500&rs=1&pid=ImgDetMain'},
-         
+          {name:'Balinera de rueda', brand:'Balresa', image:'https://th.bing.com/th/id/OIP._R4bjarQ0bCPpBnGJoQPYQHaHa?w=2500&h=2500&rs=1&pid=ImgDetMain'},
     ];
       return (
         <div className="container mt-2">
