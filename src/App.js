@@ -4,6 +4,7 @@ import TopNavbar from './components/TopNavbar';
 import Home from './pages/Home';
 import Footer from './components/Footer';
 import Login from './pages/Login';
+import Club from './pages/masters/Club';
 
 function App() {
     const [items, setItems] = useState([{
@@ -26,6 +27,7 @@ function App() {
             >
               <Routes>
                 <Route path="/" element={<Home />} />
+                 <Route path="/club" element={<Club/>} />
               </Routes>
             </div>
 
