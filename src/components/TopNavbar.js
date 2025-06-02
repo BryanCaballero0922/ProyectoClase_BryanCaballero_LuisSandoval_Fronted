@@ -24,11 +24,11 @@ function TopNavbar() {
          
             {tipoUsuario === 'admin' && (
               <li className="nav-item">
-                <Link className="nav-link" to="/contactos">Facturación</Link>
+                <Link className="nav-link" to="/club">Club BR</Link>
               </li>
             )}
 
-            <li className="nav-item"><Link className="nav-link" to="/club">Club BR</Link></li>
+            <li className="nav-item"><Link className="nav-link" to="/contactos">Facturación</Link></li>
             <li className="nav-item"><Link className="nav-link" to="/ofertas">Ofertas</Link></li>
           </ul>
 
