@@ -25,6 +25,12 @@ function Contactos() {
     setContactos(updatedContactos);
   };
 
+    const handleOnFact = (index) => {
+       alert("Factura aprobada");
+    const updatedContactos = contactos.filter((_, i) => i !== index);
+    setContactos(updatedContactos);
+  };
+
   const handleOnSubmit = (e) => {
     e.preventDefault();
     if (editIndex !== null) {
@@ -35,7 +41,7 @@ function Contactos() {
     } else {
       setContactos([...contactos, form]);
     }
-    setForm({ nombre: '', telefono: '', rtn: '', direccion: '', nombrepieza: '' });
+    setForm({ nombre: '', telefono: '', rtn: '', direccion: '',  nombrepieza: '' });
   };
 
   return (
@@ -105,6 +111,7 @@ function Contactos() {
               <td>
                 <button className="btn btn-warning btn-sm me-2" onClick={() => handleOnEdit(index)}>Editar</button>
                 <button className="btn btn-danger btn-sm" onClick={() => handleOnDelete(index)}>Eliminar</button>
+                <button className="btn btn-primary btn-sm me-2" onClick={() => handleOnFact(index)}>Facturar</button>
               </td>
             </tr>
           ))}
