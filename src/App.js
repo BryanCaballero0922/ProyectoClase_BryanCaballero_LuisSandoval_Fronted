@@ -5,7 +5,7 @@ import Home from './pages/Home';
 import Footer from './components/Footer';
 import Login from './pages/Login';
 import Club from './pages/masters/Club';
-import Contactos from './pages/masters/Contactos';
+import Contactos from './pages/masters/Factura';
 
 function App() {
     const [items, setItems] = useState([{

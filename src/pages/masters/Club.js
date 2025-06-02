@@ -3,7 +3,7 @@ import { useState } from "react";
 function Club() {
   const [editIndex, setEditIndex] = useState(null);
   const [club, setClub] = useState([]);
-  const [form, setForm] = useState({ name: '', phone: '', description: '', age: '' });
+  const [form, setForm] = useState({ name: '', phone: '', description: '', age: '', workshop: '' });
 
   const handleOnChangeInputs = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -29,7 +29,7 @@ function Club() {
     } else {
       setClub([...club, form]);
     }
-    setForm({ name: '', phone: '', description: '', age: '' });
+    setForm({ name: '', phone: '', description: '', age: '', workshop: ''});
   };
 
   return (
@@ -64,6 +64,14 @@ function Club() {
           placeholder="Edad"
           className="form-control mb-2"
         />
+
+         <input
+          name="workshop"
+          value={form.age}
+          onChange={handleOnChangeInputs}
+          placeholder="Taller"
+          className="form-control mb-2"
+        />
         <button className="btn btn-primary">
           {editIndex !== null ? 'Actualizar' : 'Agregar'}
         </button>
@@ -76,6 +84,7 @@ function Club() {
             <th>Número Telefónico</th>
             <th>Descripción</th>
             <th>Edad</th>
+             <th>Taller</th>
             <th>Acciones</th>
           </tr>
         </thead>
@@ -86,6 +95,7 @@ function Club() {
               <td>{item.phone}</td>
               <td>{item.description}</td>
               <td>{item.age}</td>
+               <td>{item.workshop}</td>
               <td>
                 <button className="btn btn-sm btn-warning me-2" onClick={() => handleOnEdit(index)}>Editar</button>
                 <button className="btn btn-sm btn-danger" onClick={() => handleOnDelete(index)}>Eliminar</button>

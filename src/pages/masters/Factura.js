@@ -5,10 +5,11 @@ function Contactos() {
   const [contactos, setContactos] = useState([]);
   const [form, setForm] = useState({
     nombre: '',
-    correo: '',
     telefono: '',
-    direccion: ''
-  });//hola mami
+    rtn: '',
+    direccion: '',
+    nombrepieza: ''
+  });
 
   const handleOnChangeInputs = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -34,12 +35,12 @@ function Contactos() {
     } else {
       setContactos([...contactos, form]);
     }
-    setForm({ nombre: '', correo: '', telefono: '', direccion: '' });
+    setForm({ nombre: '', telefono: '', rtn: '', direccion: '', nombrepieza: '' });
   };
 
   return (
     <div className="container mt-4">
-      <h2>Gestión de Contactos</h2>
+      <h2>Gestión de Facturación</h2>
       <form onSubmit={handleOnSubmit} className="mb-4">
         <input
           name="nombre"
@@ -49,17 +50,17 @@ function Contactos() {
           className="form-control mb-2"
         />
         <input
-          name="correo"
-          value={form.correo}
-          onChange={handleOnChangeInputs}
-          placeholder="Correo electrónico"
-          className="form-control mb-2"
-        />
-        <input
           name="telefono"
           value={form.telefono}
           onChange={handleOnChangeInputs}
-          placeholder="Teléfono"
+          placeholder="Número telefónico"
+          className="form-control mb-2"
+        />
+        <input
+          name="rtn"
+          value={form.rtn}
+          onChange={handleOnChangeInputs}
+          placeholder="RTN"
           className="form-control mb-2"
         />
         <input
@@ -69,6 +70,14 @@ function Contactos() {
           placeholder="Dirección"
           className="form-control mb-2"
         />
+        <input
+          name="nombrepieza"
+          value={form.taller}
+          onChange={handleOnChangeInputs}
+          placeholder="Informacion de la pieza"
+          className="form-control mb-2"
+        />
+
         <button className="btn btn-success">
           {editIndex !== null ? 'Actualizar Contacto' : 'Agregar Contacto'}
         </button>
@@ -78,9 +87,10 @@ function Contactos() {
         <thead>
           <tr>
             <th>Nombre</th>
-            <th>Correo</th>
             <th>Teléfono</th>
+            <th>RTN</th>
             <th>Dirección</th>
+            <th>Informacion de la pieza</th>
             <th>Acciones</th>
           </tr>
         </thead>
@@ -88,9 +98,10 @@ function Contactos() {
           {contactos.map((contacto, index) => (
             <tr key={index}>
               <td>{contacto.nombre}</td>
-              <td>{contacto.correo}</td>
               <td>{contacto.telefono}</td>
+              <td>{contacto.rtn}</td>
               <td>{contacto.direccion}</td>
+              <td>{contacto.nombrepieza}</td>
               <td>
                 <button className="btn btn-warning btn-sm me-2" onClick={() => handleOnEdit(index)}>Editar</button>
                 <button className="btn btn-danger btn-sm" onClick={() => handleOnDelete(index)}>Eliminar</button>

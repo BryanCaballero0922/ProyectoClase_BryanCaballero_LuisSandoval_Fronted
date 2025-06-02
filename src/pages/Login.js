@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -44,6 +43,9 @@ function Login() {
       );
 
       if (usuario) {
+        const tipo = usuario.codigo === '1' ? 'admin' : 'usuario';
+        localStorage.setItem('tipoUsuario', tipo);
+
         navigate('/');
       } else {
         setInputError('Este usuario no existe.');
@@ -69,53 +71,53 @@ function Login() {
 
   return (
     <div
-  className="d-flex align-items-center justify-content-center"
-  style={{
-    height: '100vh',
-    backgroundImage: "url('https://estaticos.qdq.com/swdata/photos/396/396021061/8b83a9c6a6b44011bf8bfd593373ac1d.jpg')",
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat'
-  }}
->
-  <div className="card bg-dark text-white border border-warning shadow-lg rounded-3" style={{ width: '340px' }}>
-    <div className="card-body">
-      <h1 className="text-center mb-3">Autopartes University</h1>
-      <h2 className="text-center mb-3">Iniciar Sesión</h2>
-      <form onSubmit={handleOnSubmit}>
-        <input
-          type="tel"
-          className="form-control mb-3"
-          placeholder="Ingrese su código"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          onBlur={handleOnBlur}
-        />
-        {inputError && <div className="text-danger mb-3">{inputError}</div>}
+      className="d-flex align-items-center justify-content-center"
+      style={{
+        height: '100vh',
+        backgroundImage: "url('https://estaticos.qdq.com/swdata/photos/396/396021061/8b83a9c6a6b44011bf8bfd593373ac1d.jpg')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
+    >
+      <div className="card bg-dark text-white border border-warning shadow-lg rounded-3" style={{ width: '340px' }}>
+        <div className="card-body">
+          <h1 className="text-center mb-3">Autopartes University</h1>
+          <h2 className="text-center mb-3">Iniciar Sesión</h2>
+          <form onSubmit={handleOnSubmit}>
+            <input
+              type="tel"
+              className="form-control mb-3"
+              placeholder="Ingrese su código"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              onBlur={handleOnBlur}
+            />
+            {inputError && <div className="text-danger mb-3">{inputError}</div>}
 
-        <input
-          type="password"
-          className="form-control mb-3"
-          placeholder="Ingrese su contraseña"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          onBlur={handlePasswordBlur}
-        />
-        {passwordError && <div className="text-danger mb-3">{passwordError}</div>}
+            <input
+              type="password"
+              className="form-control mb-3"
+              placeholder="Ingrese su contraseña"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              onBlur={handlePasswordBlur}
+            />
+            {passwordError && <div className="text-danger mb-3">{passwordError}</div>}
 
-        <button
-          className="btn btn-light w-100"
-          type="submit"
-          onClick={handleOnClick}
-          onMouseOver={(e) => e.currentTarget.className = "btn btn-warning w-100"}
-          onMouseOut={(e) => e.currentTarget.className = "btn btn-light w-100"}
-        >
-          Ingresar
-        </button>
-      </form>
+            <button
+              className="btn btn-light w-100"
+              type="submit"
+              onClick={handleOnClick}
+              onMouseOver={(e) => e.currentTarget.className = "btn btn-warning w-100"}
+              onMouseOut={(e) => e.currentTarget.className = "btn btn-light w-100"}
+            >
+              Ingresar
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
   );
 }
 
