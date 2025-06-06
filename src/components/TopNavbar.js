@@ -1,13 +1,18 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import React, { useEffect, useState } from 'react';
 
 function TopNavbar() {
   const [tipoUsuario, setTipoUsuario] = useState('');
+  const location = useLocation();
 
   useEffect(() => {
     const tipo = localStorage.getItem('tipoUsuario');
     setTipoUsuario(tipo);
   }, []);
+
+  if (location.pathname === '/login') {
+    return null; // No mostrar navbar en la ruta de login
+  }
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-success">
@@ -21,7 +26,6 @@ function TopNavbar() {
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item"><Link className="nav-link" to="/home">Inicio</Link></li>
 
-         
             {tipoUsuario === 'admin' && (
               <li className="nav-item">
                 <Link className="nav-link" to="/club">Club BR</Link>
@@ -31,7 +35,6 @@ function TopNavbar() {
             <li className="nav-item"><Link className="nav-link" to="/Factura">Facturación</Link></li>
             <li className="nav-item"><Link className="nav-link" to="/ofertas">Ofertas</Link></li>
           </ul>
-
         </div>
       </div>
     </nav>
