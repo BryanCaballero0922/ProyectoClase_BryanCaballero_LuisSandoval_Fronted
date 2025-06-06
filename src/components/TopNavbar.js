@@ -10,7 +10,7 @@ function TopNavbar() {
   }, []);
 
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-success">
       <div className="container-fluid">
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
           aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,7 +28,7 @@ function TopNavbar() {
               </li>
             )}
 
-            <li className="nav-item"><Link className="nav-link" to="/contactos">Facturación</Link></li>
+            <li className="nav-item"><Link className="nav-link" to="/Factura">Facturación</Link></li>
             <li className="nav-item"><Link className="nav-link" to="/ofertas">Ofertas</Link></li>
           </ul>
 

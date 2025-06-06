@@ -14,6 +14,12 @@ function Club() {
     setEditIndex(id);
   };
 
+  const handleOnFact = (index) => {
+       alert("Cliente Registrado");
+    const updatedContactos = contactos.filter((_, i) => i !== index);
+    setContactos(updatedContactos);
+  };
+
   const handleOnDelete = (id) => {
     const updatedClub = club.filter((_, index) => index !== id);
     setClub(updatedClub);
@@ -99,6 +105,7 @@ function Club() {
               <td>
                 <button className="btn btn-sm btn-warning me-2" onClick={() => handleOnEdit(index)}>Editar</button>
                 <button className="btn btn-sm btn-danger" onClick={() => handleOnDelete(index)}>Eliminar</button>
+                <button className="btn btn-primary btn-sm me-2" onClick={() => handleOnFact(index)}>Registrar</button>
               </td>
             </tr>
           ))}
