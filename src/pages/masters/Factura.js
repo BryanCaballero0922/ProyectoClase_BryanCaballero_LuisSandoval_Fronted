@@ -78,7 +78,7 @@ function Contactos() {
         />
         <input
           name="nombrepieza"
-          value={form.taller}
+          value={form.nombrepieza}
           onChange={handleOnChangeInputs}
           placeholder="Informacion de la pieza"
           className="form-control mb-2"

@@ -67,7 +67,7 @@ function Club() {
 
          <input
           name="workshop"
-          value={form.age}
+          value={form.workshop}
           onChange={handleOnChangeInputs}
           placeholder="Taller"
           className="form-control mb-2"

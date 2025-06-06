@@ -46,7 +46,7 @@ function Login() {
         const tipo = usuario.codigo === '1' ? 'admin' : 'usuario';
         localStorage.setItem('tipoUsuario', tipo);
 
-        navigate('/');
+        navigate('/home');
       } else {
         setInputError('Este usuario no existe.');
       }

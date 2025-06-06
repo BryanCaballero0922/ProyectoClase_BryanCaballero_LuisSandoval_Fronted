@@ -19,7 +19,7 @@ function TopNavbar() {
 
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item"><Link className="nav-link" to="/">Inicio</Link></li>
+            <li className="nav-item"><Link className="nav-link" to="/home">Inicio</Link></li>
 
          
             {tipoUsuario === 'admin' && (
@@ -32,10 +32,6 @@ function TopNavbar() {
             <li className="nav-item"><Link className="nav-link" to="/ofertas">Ofertas</Link></li>
           </ul>
 
-          <form className="d-flex" role="search">
-            <input className="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar" />
-            <button className="btn btn-outline-success" type="submit">Buscar</button>
-          </form>
         </div>
       </div>
     </nav>

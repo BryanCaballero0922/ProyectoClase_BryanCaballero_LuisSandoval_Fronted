@@ -8,39 +8,28 @@ import Club from './pages/masters/Club';
 import Contactos from './pages/masters/Factura';
 
 function App() {
-    const [items, setItems] = useState([{
-        title: "Progra Web",
-        description: "Clase de los sabados"
-    }]);
+  const [items, setItems] = useState([{
+    title: "Progra Web",
+    description: "Clase de los sabados"
+  }]);
 
-     return (
+  return (
     <BrowserRouter>
       <Routes>
+       
         <Route path="/login" element={<Login />} />
 
+        
         <Route path="/*" element={
           <div className="d-flex flex-column min-vh-100">
             <TopNavbar />
-
-            <div
-              className="flex-grow-1"
-              style={{ marginLeft: '210px', marginTop: '60px',padding: '20px'}}
-            >
+            <div className="flex-grow-1" style={{ marginLeft: '210px', marginTop: '60px', padding: '20px' }}>
               <Routes>
-                <Route path="/" element={<Home />} />
-                 <Route path="/club" element={<Club/>} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/club" element={<Club />} />
+                <Route path="/contactos" element={<Contactos />} />
               </Routes>
             </div>
-
-            <div
-              className="flex-grow-1"
-              style={{ marginLeft: '200px', marginTop: '0px',padding: '20px'}}
-            >
-              <Routes>
-                 <Route path="/contactos" element={<Contactos/>} />
-              </Routes>
-            </div>
-
             <Footer />
           </div>
         } />
