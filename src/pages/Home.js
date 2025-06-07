@@ -79,7 +79,15 @@ function Home() {
       image: 'https://m.media-amazon.com/images/I/81FmeBce0mL._AC_UF894,1000_QL80_.jpg',
       price: '$10.50',
       description: 'Filtro de aceite para mantener limpio el sistema del motor.'
+    },
+{
+      name: 'Filtro de aceite',
+      brand: 'MANN',
+      image: 'https://m.media-amazon.com/images/I/81FmeBce0mL._AC_UF894,1000_QL80_.jpg',
+      price: '$10.50',
+      description: 'Filtro de aceite para mantener limpio el sistema del motor.'
     }
+    
   ];
 
   // Ahora recibe el producto completo y lo envía en el state al navegar

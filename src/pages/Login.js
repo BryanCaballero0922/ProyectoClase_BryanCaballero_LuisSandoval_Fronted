@@ -111,7 +111,7 @@ function Login() {
               onClick={handleOnClick}
               onMouseOver={(e) => e.currentTarget.className = "btn btn-warning w-100"}
               onMouseOut={(e) => e.currentTarget.className = "btn btn-light w-100"}
-              onMouseOut={(e) => e.currentTarget.className = "btn btn-light w-100"}
+              
             >
               Ingresar
             </button>
