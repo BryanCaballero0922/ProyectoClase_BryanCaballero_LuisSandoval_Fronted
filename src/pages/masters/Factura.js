@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-function Contactos() {
+function Factura() {
   const [editIndex, setEditIndex] = useState(null);
-  const [contactos, setContactos] = useState([]);
+  const [facturacion, setFacturacion] = useState([]);
   const [form, setForm] = useState({
     nombre: '',
     telefono: '',
@@ -16,30 +16,30 @@ function Contactos() {
   };
 
   const handleOnEdit = (index) => {
-    setForm(contactos[index]);
+    setForm(facturacion[index]);
     setEditIndex(index);
   };
 
   const handleOnDelete = (index) => {
-    const updatedContactos = contactos.filter((_, i) => i !== index);
-    setContactos(updatedContactos);
+    const updatedFacturacion = facturacion.filter((_, i) => i !== index);
+    setFacturacion(updatedFacturacion);
   };
 
     const handleOnFact = (index) => {
        alert("Factura aprobada");
-    const updatedContactos = contactos.filter((_, i) => i !== index);
-    setContactos(updatedContactos);
+    const updatedFacturacion = facturacion.filter((_, i) => i !== index);
+    setFacturacion(updatedFacturacion);
   };
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
     if (editIndex !== null) {
-      const updatedContactos = [...contactos];
-      updatedContactos[editIndex] = form;
-      setContactos(updatedContactos);
+      const updatedFacturacion = [...facturacion];
+      updatedFacturacion[editIndex] = form;
+      setFacturacion(updatedFacturacion);
       setEditIndex(null);
     } else {
-      setContactos([...contactos, form]);
+      setFacturacion([...facturacion, form]);
     }
     setForm({ nombre: '', telefono: '', rtn: '', direccion: '',  nombrepieza: '' });
   };
@@ -101,13 +101,13 @@ function Contactos() {
           </tr>
         </thead>
         <tbody>
-          {contactos.map((contacto, index) => (
+          {facturacion.map((facturacion, index) => (
             <tr key={index}>
-              <td>{contacto.nombre}</td>
-              <td>{contacto.telefono}</td>
-              <td>{contacto.rtn}</td>
-              <td>{contacto.direccion}</td>
-              <td>{contacto.nombrepieza}</td>
+              <td>{facturacion.nombre}</td>
+              <td>{facturacion.telefono}</td>
+              <td>{facturacion.rtn}</td>
+              <td>{facturacion.direccion}</td>
+              <td>{facturacion.nombrepieza}</td>
               <td>
                 <button className="btn btn-warning btn-sm me-2" onClick={() => handleOnEdit(index)}>Editar</button>
                 <button className="btn btn-danger btn-sm" onClick={() => handleOnDelete(index)}>Eliminar</button>
@@ -121,4 +121,4 @@ function Contactos() {
   );
 }
 
-export default Contactos;
+export default Factura;

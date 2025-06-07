@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function Login() {
-  const [email, setEmail] = useState('');
+  const [codigo, setCodigo] = useState('');
   const [password, setPassword] = useState('');
   const [inputError, setInputError] = useState(null);
   const [passwordError, setPasswordError] = useState(null);
@@ -15,7 +15,7 @@ function Login() {
   const navigate = useNavigate();
 
   const handleOnClick = () => {
-    console.log("valor de código: " + email);
+    console.log("valor de código: " + codigo);
   };
 
   const handleOnSubmit = (e) => {
@@ -23,7 +23,7 @@ function Login() {
 
     let valid = true;
 
-    if (!/^\d+$/.test(email)) {
+    if (!/^\d+$/.test(codigo)) {
       setInputError('Código inválido. No se reconoce este codigo.');
       valid = false;
     } else {
@@ -39,7 +39,7 @@ function Login() {
 
     if (valid) {
       const usuario = usuariosValidos.find(
-        (u) => u.codigo === email && u.password === password
+        (u) => u.codigo === codigo && u.password === password
       );
 
       if (usuario) {
@@ -54,7 +54,7 @@ function Login() {
   };
 
   const handleOnBlur = () => {
-    if (/^\d+$/.test(email)) {
+    if (/^\d+$/.test(codigo)) {
       setInputError(null);
     } else {
       setInputError('Solo se permiten números.');
@@ -89,8 +89,8 @@ function Login() {
               type="tel"
               className="form-control mb-3"
               placeholder="Ingrese su código"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={codigo}
+              onChange={(e) => setCodigo(e.target.value)}
               onBlur={handleOnBlur}
             />
             {inputError && <div className="text-danger mb-3">{inputError}</div>}
