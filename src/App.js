@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Club from './pages/masters/Club';
 import Factura from './pages/masters/Factura';
+import Ofertas from './pages/masters/Ofertas';  // Importa tu nueva página Ofertas
 
 function AppContent() {
   const location = useLocation();
@@ -21,6 +22,7 @@ function AppContent() {
           <Route path="/home" element={<Home />} />
           <Route path="/club" element={<Club />} />
           <Route path="/factura" element={<Factura />} />
+          <Route path="/ofertas" element={<Ofertas />} />  {/* Nueva ruta añadida */}
         </Routes>
       </div>
 
@@ -38,3 +40,4 @@ function App() {
 }
 
 export default App;
+
