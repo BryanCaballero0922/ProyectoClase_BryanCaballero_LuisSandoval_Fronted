@@ -1,16 +1,16 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import TopNavbar from './components/TopNavbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Club from './pages/masters/Club';
 import Factura from './pages/masters/Factura';
-import Ofertas from './pages/masters/Ofertas';  // Importa tu nueva página Ofertas
+import Ofertas from './pages/masters/Ofertas';
 
 function AppContent() {
   const location = useLocation();
-  const mostrarLayout = location.pathname !== '/';
+  const mostrarLayout = location.pathname !== '/login';  
 
   return (
     <div className="d-flex flex-column min-vh-100">
@@ -18,11 +18,11 @@ function AppContent() {
 
       <div className="flex-grow-1 p-3">
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/home" element={<Home />} />
           <Route path="/club" element={<Club />} />
           <Route path="/factura" element={<Factura />} />
-          <Route path="/ofertas" element={<Ofertas />} />  {/* Nueva ruta añadida */}
+          <Route path="/Ofertas" element={<Ofertas />} />
         </Routes>
       </div>
 
@@ -40,4 +40,3 @@ function App() {
 }
 
 export default App;
-

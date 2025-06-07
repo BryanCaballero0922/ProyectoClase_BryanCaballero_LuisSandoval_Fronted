@@ -79,18 +79,10 @@ function Home() {
       image: 'https://m.media-amazon.com/images/I/81FmeBce0mL._AC_UF894,1000_QL80_.jpg',
       price: '$10.50',
       description: 'Filtro de aceite para mantener limpio el sistema del motor.'
-    },
-{
-      name: 'Filtro de aceite',
-      brand: 'MANN',
-      image: 'https://m.media-amazon.com/images/I/81FmeBce0mL._AC_UF894,1000_QL80_.jpg',
-      price: '$10.50',
-      description: 'Filtro de aceite para mantener limpio el sistema del motor.'
     }
-    
   ];
 
-  // Ahora recibe el producto completo y lo envía en el state al navegar
+  
   const handleFacturar = (producto) => {
     navigate('/Factura', { state: { producto } });
   };
@@ -121,7 +113,7 @@ function Home() {
         <div className="col-12">
           <h2 className="text-center bg-secondary text-white p-3 rounded">Productos</h2>
         </div>
-        {productosFiltrados(productos).map((item, idx) => (
+{productosFiltrados(productos).map((item, idx) => (
           <div className="col-md-3 mb-4" key={`p-${idx}`}>
             <CardItem {...item} onFacturar={() => handleFacturar(item)} />
           </div>
@@ -142,6 +134,4 @@ function Home() {
   );
 }
 
-export default Home;
-
-
+export default Home; 
