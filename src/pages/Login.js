@@ -1,8 +1,8 @@
-import { useState } from 'react';
+ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function Login() {
-  const [codigo, setCodigo] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [inputError, setInputError] = useState(null);
   const [passwordError, setPasswordError] = useState(null);
@@ -15,7 +15,7 @@ function Login() {
   const navigate = useNavigate();
 
   const handleOnClick = () => {
-    console.log("valor de código: " + codigo);
+    console.log("valor de código: " + email);
   };
 
   const handleOnSubmit = (e) => {
@@ -23,7 +23,7 @@ function Login() {
 
     let valid = true;
 
-    if (!/^\d+$/.test(codigo)) {
+    if (!/^\d+$/.test(email)) {
       setInputError('Código inválido. No se reconoce este codigo.');
       valid = false;
     } else {
@@ -39,7 +39,7 @@ function Login() {
 
     if (valid) {
       const usuario = usuariosValidos.find(
-        (u) => u.codigo === codigo && u.password === password
+        (u) => u.codigo === email && u.password === password
       );
 
       if (usuario) {
@@ -54,7 +54,7 @@ function Login() {
   };
 
   const handleOnBlur = () => {
-    if (/^\d+$/.test(codigo)) {
+    if (/^\d+$/.test(email)) {
       setInputError(null);
     } else {
       setInputError('Solo se permiten números.');
@@ -89,8 +89,8 @@ function Login() {
               type="tel"
               className="form-control mb-3"
               placeholder="Ingrese su código"
-              value={codigo}
-              onChange={(e) => setCodigo(e.target.value)}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               onBlur={handleOnBlur}
             />
             {inputError && <div className="text-danger mb-3">{inputError}</div>}
@@ -111,7 +111,6 @@ function Login() {
               onClick={handleOnClick}
               onMouseOver={(e) => e.currentTarget.className = "btn btn-warning w-100"}
               onMouseOut={(e) => e.currentTarget.className = "btn btn-light w-100"}
-              
             >
               Ingresar
             </button>

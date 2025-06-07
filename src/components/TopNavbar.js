@@ -7,12 +7,11 @@ function TopNavbar() {
 
   useEffect(() => {
     const tipo = localStorage.getItem('tipoUsuario');
-    setTipoUsuario(tipo || ''); // fallback por si es null
-  }, [location.pathname]); // Se actualiza al cambiar de ruta
+    setTipoUsuario(tipo);
+  }, []);
 
-  // Oculta el navbar en la ruta /login
   if (location.pathname === '/login') {
-    return null;
+    return null; // No mostrar navbar en la ruta de login
   }
 
   return (
@@ -25,9 +24,7 @@ function TopNavbar() {
 
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
-              <Link className="nav-link" to="/home">Inicio</Link>
-            </li>
+            <li className="nav-item"><Link className="nav-link" to="/home">Inicio</Link></li>
 
             {tipoUsuario === 'admin' && (
               <li className="nav-item">
@@ -35,13 +32,8 @@ function TopNavbar() {
               </li>
             )}
 
-            <li className="nav-item">
-              <Link className="nav-link" to="/factura">Facturación</Link>
-            </li>
-
-            <li className="nav-item">
-              <Link className="nav-link" to="/ofertas">Ofertas</Link>
-            </li>
+            <li className="nav-item"><Link className="nav-link" to="/Factura">Facturación</Link></li>
+            <li className="nav-item"><Link className="nav-link" to="/ofertas">Ofertas</Link></li>
           </ul>
         </div>
       </div>

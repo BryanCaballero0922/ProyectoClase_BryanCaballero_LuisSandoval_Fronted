@@ -1,6 +1,5 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
-import TopNavbar from './components/TopNavbar';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import TopNavbar from './components/TopNavbar';     // Asegúrate de tener este componente
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -10,7 +9,7 @@ import Ofertas from './pages/masters/Ofertas';
 
 function AppContent() {
   const location = useLocation();
-  const mostrarLayout = location.pathname !== '/login';  
+  const mostrarLayout = location.pathname !== '/';
 
   return (
     <div className="d-flex flex-column min-vh-100">
@@ -18,11 +17,11 @@ function AppContent() {
 
       <div className="flex-grow-1 p-3">
         <Routes>
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Login />} />
           <Route path="/home" element={<Home />} />
           <Route path="/club" element={<Club />} />
           <Route path="/factura" element={<Factura />} />
-          <Route path="/Ofertas" element={<Ofertas />} />
+          <Route path="/ofertas" element={<Ofertas />} />
         </Routes>
       </div>
 

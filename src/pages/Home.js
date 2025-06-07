@@ -82,7 +82,7 @@ function Home() {
     }
   ];
 
-  
+  // Ahora recibe el producto completo y lo envía en el state al navegar
   const handleFacturar = (producto) => {
     navigate('/Factura', { state: { producto } });
   };
@@ -113,7 +113,7 @@ function Home() {
         <div className="col-12">
           <h2 className="text-center bg-secondary text-white p-3 rounded">Productos</h2>
         </div>
-{productosFiltrados(productos).map((item, idx) => (
+        {productosFiltrados(productos).map((item, idx) => (
           <div className="col-md-3 mb-4" key={`p-${idx}`}>
             <CardItem {...item} onFacturar={() => handleFacturar(item)} />
           </div>
@@ -134,4 +134,4 @@ function Home() {
   );
 }
 
-export default Home; 
+export default Home;

@@ -134,7 +134,7 @@ function Factura() {
           value={form.direccion}
           onChange={handleOnChangeInputs}
           placeholder="Dirección"
-className="form-control mb-2"
+          className="form-control mb-2"
           required
         />
         <input
