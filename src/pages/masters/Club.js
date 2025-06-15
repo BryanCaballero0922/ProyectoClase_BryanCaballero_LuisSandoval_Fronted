@@ -15,9 +15,9 @@ function Club() {
   };
 
   const handleOnFact = (index) => {
-       alert("Cliente Registrado");
-    const updatedContactos = contactos.filter((_, i) => i !== index);
-    setContactos(updatedContactos);
+    alert("Cliente Registrado");
+    const updatedClub = club.filter((_, i) => i !== index);
+    setClub(updatedClub);
   };
 
   const handleOnDelete = (id) => {
@@ -70,8 +70,7 @@ function Club() {
           placeholder="Edad"
           className="form-control mb-2"
         />
-
-         <input
+        <input
           name="workshop"
           value={form.workshop}
           onChange={handleOnChangeInputs}
@@ -90,7 +89,7 @@ function Club() {
             <th>Número Telefónico</th>
             <th>Descripción</th>
             <th>Edad</th>
-             <th>Taller</th>
+            <th>Taller</th>
             <th>Acciones</th>
           </tr>
         </thead>
@@ -101,7 +100,7 @@ function Club() {
               <td>{item.phone}</td>
               <td>{item.description}</td>
               <td>{item.age}</td>
-               <td>{item.workshop}</td>
+              <td>{item.workshop}</td>
               <td>
                 <button className="btn btn-sm btn-warning me-2" onClick={() => handleOnEdit(index)}>Editar</button>
                 <button className="btn btn-sm btn-danger" onClick={() => handleOnDelete(index)}>Eliminar</button>
@@ -116,5 +115,3 @@ function Club() {
 }
 
 export default Club;
-
-
