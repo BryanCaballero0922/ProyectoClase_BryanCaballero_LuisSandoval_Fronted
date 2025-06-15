@@ -10,6 +10,8 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@supabase/supabase-js": "^2.50.0",
+    "axios": "^1.10.0",
     "bootstrap": "^5.3.6",
     "parcel": "^2.15.1",
     "react": "^19.1.0",
@@ -18,6 +20,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.27.1",
-    "@babel/preset-react": "^7.27.1"
+    "@babel/preset-react": "^7.27.1",
+    "buffer": "^6.0.3"
   }
 }
