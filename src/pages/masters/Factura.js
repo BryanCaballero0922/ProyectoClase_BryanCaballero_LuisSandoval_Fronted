@@ -1,205 +1,164 @@
-import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function Factura() {
   const location = useLocation();
-  const productoRecibido = location.state?.producto || null;
+  const navigate = useNavigate();
 
+  // Productos recibidos por estado, o vacio si no hay
+  const initialProductos = location.state?.productos || [];
+
+  // Estado para lista de productos (carrito)
+  const [productos, setProductos] = useState(initialProductos);
+
+  // Estado para edición: índice del producto que quieres editar cantidad
   const [editIndex, setEditIndex] = useState(null);
-  const [contactos, setFacturacion] = useState([]);
 
-  // Formulario con campos del cliente y producto
-  const [form, setForm] = useState({
-    nombre: '',
-    telefono: '',
-    rtn: '',
-    direccion: '',
-    nombrepieza: productoRecibido ? productoRecibido.name : '',
-    price: productoRecibido ? productoRecibido.price : '',
-    description: productoRecibido ? productoRecibido.description : ''
-  });
+  // Estado para formulario de cantidad a editar
+  const [cantidadEdit, setCantidadEdit] = useState("");
 
-  // Si cambia el producto (ej: si se vuelve a cargar con otro producto), actualizamos el formulario
+  // Actualizar cantidad en el formulario cuando cambias producto a editar
   useEffect(() => {
-    if (productoRecibido) {
-      setForm(formAnt => ({
-        ...formAnt,
-        nombrepieza: productoRecibido.name,
-        price: productoRecibido.price,
-        description: productoRecibido.description
-      }));
+    if (editIndex !== null) {
+      setCantidadEdit(productos[editIndex].cantidad?.toString() || "1");
+    } else {
+      setCantidadEdit("");
     }
-  }, [productoRecibido]);
+  }, [editIndex, productos]);
 
-  const handleOnChangeInputs = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+  // Manejar cambio en cantidad del formulario
+  const handleCantidadChange = (e) => {
+    setCantidadEdit(e.target.value);
   };
 
-  const handleOnEdit = (index) => {
-    setForm(contactos[index]);
-    setEditIndex(index);
-  };
-
-  const handleOnDelete = (index) => {
-    const updatedContactos = contactos.filter((_, i) => i !== index);
-    setFacturacion(updatedContactos);
-    // Si estamos editando el contacto que borramos, limpiar formulario
-    if (editIndex === index) {
-      setForm({
-        nombre: '',
-        telefono: '',
-        rtn: '',
-        direccion: '',
-        nombrepieza: productoRecibido ? productoRecibido.name : '',
-        price: productoRecibido ? productoRecibido.price : '',
-        description: productoRecibido ? productoRecibido.description : ''
-      });
-      setEditIndex(null);
-    }
-  };
-
-  const handleOnFact = (index) => {
-    alert("Factura aprobada para " + contactos[index].nombre);
-    // Opcional: eliminar de la lista o marcar como facturado
-    const updatedContactos = contactos.filter((_, i) => i !== index);
-    setFacturacion(updatedContactos);
-  };
-
-  const handleOnSubmit = (e) => {
+  // Guardar la cantidad editada en el producto
+  const handleGuardarCantidad = (e) => {
     e.preventDefault();
-    if (!form.nombre || !form.telefono || !form.direccion) {
-      alert("Por favor, complete los campos obligatorios.");
+    if (!cantidadEdit || isNaN(cantidadEdit) || Number(cantidadEdit) < 1) {
+      alert("Ingrese una cantidad válida mayor a 0");
       return;
     }
-
-    if (editIndex !== null) {
-      const updatedContactos = [...contactos];
-      updatedContactos[editIndex] = form;
-      setFacturacion(updatedContactos);
-      setEditIndex(null);
-    } else {
-      setFacturacion([...contactos, form]);
-    }
-
-    setForm({
-      nombre: '',
-      telefono: '',
-      rtn: '',
-      direccion: '',
-      nombrepieza: productoRecibido ? productoRecibido.name : '',
-      price: productoRecibido ? productoRecibido.price : '',
-      description: productoRecibido ? productoRecibido.description : ''
-    });
+    const nuevosProductos = [...productos];
+    nuevosProductos[editIndex].cantidad = Number(cantidadEdit);
+    setProductos(nuevosProductos);
+    setEditIndex(null);
   };
+
+  // Eliminar producto
+  const handleEliminar = (index) => {
+    const nuevosProductos = productos.filter((_, i) => i !== index);
+    setProductos(nuevosProductos);
+    if (editIndex === index) setEditIndex(null);
+  };
+
+  // "Facturar" producto (simula quitar y alerta)
+  const handleFacturar = (index) => {
+    alert(`Producto "${productos[index].name}" facturado`);
+    const nuevosProductos = productos.filter((_, i) => i !== index);
+    setProductos(nuevosProductos);
+    if (editIndex === index) setEditIndex(null);
+  };
+
+  // Calcular total
+  const total = productos.reduce((acc, item) => {
+    const priceNum = Number(item.price.replace("$", ""));
+    return acc + priceNum * (item.cantidad || 1);
+  }, 0);
 
   return (
     <div className="container mt-4">
-      <h2>Gestión de Facturación</h2>
+      <h2>Factura</h2>
 
-      {productoRecibido && (
-        <div className="alert alert-info">
-          <strong>Producto seleccionado:</strong><br />
-          Nombre: {productoRecibido.name} <br />
-          Precio: {productoRecibido.price} <br />
-          Descripción: {productoRecibido.description}
-        </div>
+      {productos.length === 0 ? (
+        <p>No hay productos en la factura</p>
+      ) : (
+        <>
+          <table className="table">
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Marca</th>
+                <th>Cantidad</th>
+                <th>Precio Unitario</th>
+                <th>Subtotal</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {productos.map((item, index) => {
+                const priceNum = Number(item.price.replace("$", ""));
+                const subtotal = priceNum * (item.cantidad || 1);
+                return (
+                  <tr key={index}>
+                    <td>{item.name}</td>
+                    <td>{item.brand}</td>
+                    <td>{item.cantidad || 1}</td>
+                    <td>${priceNum.toFixed(2)}</td>
+                    <td>${subtotal.toFixed(2)}</td>
+                    <td>
+                      <button
+                        className="btn btn-sm btn-warning me-2"
+                        onClick={() => setEditIndex(index)}
+                      >
+                        Editar
+                      </button>
+                      <button
+                        className="btn btn-sm btn-danger me-2"
+                        onClick={() => handleEliminar(index)}
+                      >
+                        Eliminar
+                      </button>
+                      <button
+                        className="btn btn-sm btn-primary"
+                        onClick={() => handleFacturar(index)}
+                      >
+                        Facturar
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+
+          {/* Formulario para editar cantidad */}
+          {editIndex !== null && (
+            <form onSubmit={handleGuardarCantidad} className="mb-4">
+              <label>
+                Editar cantidad de{" "}
+                <strong>{productos[editIndex].name}</strong>:
+              </label>
+              <input
+                type="number"
+                min="1"
+                value={cantidadEdit}
+                onChange={handleCantidadChange}
+                className="form-control mb-2"
+              />
+              <button className="btn btn-success me-2" type="submit">
+                Guardar
+              </button>
+              <button
+                className="btn btn-secondary"
+                type="button"
+                onClick={() => setEditIndex(null)}
+              >
+                Cancelar
+              </button>
+            </form>
+          )}
+
+          <h4>Total: ${total.toFixed(2)}</h4>
+        </>
       )}
 
-      <form onSubmit={handleOnSubmit} className="mb-4">
-        <input
-          name="nombre"
-          value={form.nombre}
-          onChange={handleOnChangeInputs}
-          placeholder="Nombre"
-          className="form-control mb-2"
-          required
-        />
-        <input
-          name="telefono"
-          value={form.telefono}
-          onChange={handleOnChangeInputs}
-          placeholder="Número telefónico"
-          className="form-control mb-2"
-          required
-        />
-        <input
-          name="rtn"
-          value={form.rtn}
-          onChange={handleOnChangeInputs}
-          placeholder="RTN"
-          className="form-control mb-2"
-        />
-        <input
-          name="direccion"
-          value={form.direccion}
-          onChange={handleOnChangeInputs}
-          placeholder="Dirección"
-          className="form-control mb-2"
-          required
-        />
-        <input
-          name="nombrepieza"
-          value={form.nombrepieza}
-          onChange={handleOnChangeInputs}
-          placeholder="Nombre de la pieza"
-          className="form-control mb-2"
-          readOnly
-        />
-        <input
-          name="price"
-          value={form.price}
-          placeholder="Precio"
-          className="form-control mb-2"
-          readOnly
-        />
-        <textarea
-          name="description"
-          value={form.description}
-          placeholder="Descripción"
-          className="form-control mb-2"
-          rows={2}
-          readOnly
-        />
-
-        <button className="btn btn-success">
-          {editIndex !== null ? 'Actualizar Contacto' : 'Agregar Contacto'}
-        </button>
-      </form>
-
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Teléfono</th>
-            <th>RTN</th>
-            <th>Dirección</th>
-            <th>Nombre de la pieza</th>
-            <th>Precio</th>
-            <th>Descripción</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {contactos.map((contacto, index) => (
-            <tr key={index}>
-              <td>{contacto.nombre}</td>
-              <td>{contacto.telefono}</td>
-              <td>{contacto.rtn}</td>
-              <td>{contacto.direccion}</td>
-              <td>{contacto.nombrepieza}</td>
-              <td>{contacto.price}</td>
-              <td>{contacto.description}</td>
-              <td>
-                <button className="btn btn-warning btn-sm me-2" onClick={() => handleOnEdit(index)}>Editar</button>
-                <button className="btn btn-danger btn-sm me-2" onClick={() => handleOnDelete(index)}>Eliminar</button>
-                <button className="btn btn-primary btn-sm" onClick={() => handleOnFact(index)}>Facturar</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <button className="btn btn-secondary" onClick={() => navigate(-1)}>
+        Volver
+      </button>
     </div>
   );
 }
 
 export default Factura;
+
+

@@ -1,23 +1,31 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
-function Login() {
+function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
   const navigate = useNavigate();
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     setError(null);
+    setSuccess(null);
 
-    if (!email || password.length < 6) {
-      setError('Por favor, ingrese un email y una contraseña de al menos 6 caracteres.');
+    if (password !== confirmPassword) {
+      setError('Las contraseñas no coinciden.');
       return;
+    }
+    
+    if (password.length < 6) {
+        setError('La contraseña debe tener al menos 6 caracteres.');
+        return;
     }
 
     try {
-      const response = await fetch('http://localhost:3301/api/auth/login', {
+      const response = await fetch('http://localhost:3301/api/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -28,19 +36,15 @@ function Login() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'Error al iniciar sesión.');
+        throw new Error(data.error || 'Error al registrar el usuario.');
       }
       
-      // --- LÓGICA DE ROL ACTUALIZADA ---
-      // Ya no decidimos el rol en el frontend. Lo recibimos del backend.
-      localStorage.setItem('tipoUsuario', data.role); // Usamos el rol que nos envió el backend
-      localStorage.setItem('authToken', data.session.access_token);
+      setSuccess('¡Usuario registrado con éxito! Serás redirigido al login.');
 
-      // Importante: forzar un refresh para que el Navbar se actualice con el nuevo localStorage
-      // El navigate por sí solo a veces no renderiza componentes fuera del <Routes> que loco no xD
-      navigate('/home');
-      window.location.reload();
-
+      // Redirigir al login después de 2 segundos
+      setTimeout(() => {
+        navigate('/');
+      }, 2000);
 
     } catch (err) {
       setError(err.message);
@@ -56,10 +60,10 @@ function Login() {
         backgroundSize: 'cover',
       }}
     >
-      <div className="card bg-dark text-white border border-warning shadow-lg rounded-3" style={{ width: '340px' }}>
+      <div className="card bg-dark text-white border border-success shadow-lg rounded-3" style={{ width: '380px' }}>
         <div className="card-body">
           <h1 className="text-center mb-3">Autopartes University</h1>
-          <h2 className="text-center mb-3">Iniciar Sesión</h2>
+          <h2 className="text-center mb-3">Crear Nueva Cuenta</h2>
           <form onSubmit={handleOnSubmit}>
             <input
               type="email"
@@ -67,6 +71,7 @@ function Login() {
               placeholder="Ingrese su email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required
             />
             
             <input
@@ -75,19 +80,30 @@ function Login() {
               placeholder="Ingrese su contraseña"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+
+            <input
+              type="password"
+              className="form-control mb-3"
+              placeholder="Confirme su contraseña"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
             />
             
-            {error && <div className="text-danger mb-3">{error}</div>}
+            {error && <div className="alert alert-danger">{error}</div>}
+            {success && <div className="alert alert-success">{success}</div>}
 
             <button
-              className="btn btn-light w-100"
+              className="btn btn-success w-100"
               type="submit"
             >
-              Ingresar
+              Registrarse
             </button>
           </form>
           <p className="text-center mt-3 mb-0">
-            ¿No tienes una cuenta? <Link to="/register">Regístrate aquí</Link>
+            ¿Ya tienes una cuenta? <Link to="/">Inicia Sesión Aquí</Link>
           </p>
         </div>
       </div>
@@ -95,4 +111,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Register;
